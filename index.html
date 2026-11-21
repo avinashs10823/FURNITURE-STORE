@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURNISH Furniture Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h2>FURNISH<span>.</span></h2>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Shop</a>
+        <a href="#about">About</a>
+    </nav>
+    <button onclick="showLogin()">Login</button>
+    <button onclick="showCart()">Cart (<span id="cart-count">0</span>)</button>
+    <button onclick="showAdmin()">Admin</button>
+</header>
+
+<section id="home">
+    <h1>Make Your Home Beautiful</h1>
+    <p>Discover Modern Furniture For Your Home</p>
+    <a href="#products">Shop Now</a>
+</section>
+
+<section id="products">
+    <h2>Our Furniture Collection</h2>
+    <input id="search" placeholder="Search furniture..." oninput="displayProducts()">
+    <select id="category" onchange="displayProducts()">
+        <option>All</option>
+        <option>Sofa</option>
+        <option>Chair</option>
+        <option>Bed</option>
+        <option>Table</option>
+    </select>
+    <select id="sort" onchange="displayProducts()">
+        <option value="default">Sort By</option>
+        <option value="low">Price Low to High</option>
+        <option value="high">Price High to Low</option>
+    </select>
+    <div id="product-list"></div>
+</section>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>FURNISH provides stylish, comfortable and affordable furniture.</p>
+</section>
+
+<footer>
+    <h2>FURNISH.</h2>
+    <p>© 2026 All Rights Reserved.</p>
+</footer>
+
+<div class="modal" id="product-modal">
+    <div class="box"><button onclick="closeModal('product-modal')">X</button><div id="product-details"></div></div>
+</div>
+
+<div class="modal" id="cart-modal">
+    <div class="box">
+        <button onclick="closeModal('cart-modal')">X</button>
+        <h2>My Cart</h2>
+        <div id="cart-items"></div>
+        <h3 id="cart-total"></h3>
+        <button onclick="checkout()">Checkout</button>
+    </div>
+</div>
+
+<div class="modal" id="login-modal">
+    <div class="box">
+        <button onclick="closeModal('login-modal')">X</button>
+        <h2 id="auth-heading">Login</h2>
+        <form id="auth-form">
+            <input id="auth-name" placeholder="Name" hidden>
+            <input id="auth-email" type="email" placeholder="Email" required>
+            <input id="auth-password" type="password" placeholder="Password" required>
+            <button id="auth-submit">Login</button>
+        </form>
+        <button onclick="toggleAuth()">Register / Login</button>
+    </div>
+</div>
+
+<div class="modal" id="checkout-modal">
+    <div class="box">
+        <button onclick="closeModal('checkout-modal')">X</button>
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+            <input id="customer-name" placeholder="Name" required>
+            <input id="customer-phone" placeholder="Phone" pattern="[0-9]{10}" required>
+            <textarea id="customer-address" placeholder="Address" required></textarea>
+            <select id="payment-method" required>
+                <option value="">Payment Method</option>
+                <option>Cash on Delivery</option>
+                <option>UPI (Demo)</option>
+            </select>
+            <button>Place Order</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="admin-modal">
+    <div class="box">
+        <button onclick="closeModal('admin-modal')">X</button>
+        <div id="admin-login">
+            <h2>Admin Login</h2>
+            <form id="admin-form">
+                <input id="admin-user" placeholder="Username" required>
+                <input id="admin-pass" type="password" placeholder="Password" required>
+                <button>Login</button>
+            </form>
+        </div>
+        <div id="admin-panel" hidden>
+            <button onclick="adminLogout()">Logout</button>
+            <h2>Dashboard</h2>
+            <p>Products: <span id="total-products"></span></p>
+            <p>Orders: <span id="total-orders"></span></p>
+            <p>Users: <span id="total-users"></span></p>
+            <form id="product-form">
+                <input id="edit-id" type="hidden">
+                <input id="p-name" placeholder="Product Name" required>
+                <input id="p-price" type="number" placeholder="Price" required>
+                <select id="p-category" required>
+                    <option value="">Category</option>
+                    <option>Sofa</option><option>Chair</option>
+                    <option>Bed</option><option>Table</option>
+                </select>
+                <input id="p-image" placeholder="Image URL" required>
+                <textarea id="p-description" placeholder="Description" required></textarea>
+                <button>Save Product</button>
+            </form>
+            <div id="admin-products"></div>
+            <h3>Orders</h3>
+            <div id="admin-orders"></div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
